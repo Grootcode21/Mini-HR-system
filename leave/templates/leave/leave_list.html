@@ -1,0 +1,22 @@
+{% extends 'leave/base.html' %}
+{% block content %}
+<h2>All Leave Requests (Admin)</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>User</th><th>Start</th><th>End</th><th>Reason</th><th>Status</th><th>Actions</th>
+    </tr>
+    {% for leave in leaves %}
+    <tr>
+        <td>{{ leave.user.username }}</td>
+        <td>{{ leave.start_date }}</td>
+        <td>{{ leave.end_date }}</td>
+        <td>{{ leave.reason }}</td>
+        <td>{{ leave.status }}</td>
+        <td>
+            <a href="{% url 'approve_leave' leave.id %}" class="btn btn-sm btn-success">Approve</a>
+            <a href="{% url 'reject_leave' leave.id %}" class="btn btn-sm btn-danger">Reject</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
